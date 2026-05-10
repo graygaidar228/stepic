@@ -1,6 +1,3 @@
-// Jenkinsfile
-// Мой первый пайплайн
-
 pipeline {
     agent any
     stages {
@@ -21,6 +18,14 @@ pipeline {
                 sh 'pwd'
                 echo 'Список файлов:'
                 sh 'ls -la'
+            }
+        }
+
+        stage('Environment') {
+            steps {
+                echo "Build Number: ${BUILD_NUMBER}"
+                echo "Job Name: ${JOB_NAME}"
+                echo "Workspace: ${WORKSPACE}"
             }
         }
     }
