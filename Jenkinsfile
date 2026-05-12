@@ -1,4 +1,4 @@
-pipeline {
+kpipeline {
     agent any
     stages {
         stage('Prepare') {
@@ -32,5 +32,14 @@ pipeline {
                 echo "Name job: ${JOB_NAME}"
             }
         }
+        stage('Cleanup') {
+            steps {
+                echo 'Cleaning up temporary files...'
+                sh 'rm -rf temp logs'
+                sh 'ls -la'
+                echo 'Cleanup completed'
+            }
+        }
     }
 }
+
