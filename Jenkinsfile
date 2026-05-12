@@ -1,4 +1,4 @@
-kpipeline {
+pipeline {
     agent any
     stages {
         stage('Prepare') {
@@ -16,6 +16,12 @@ kpipeline {
                 echo 'Build completed'
             }
         }
+        stage('Verify') {
+            steps {
+                sh 'cat build/version.txt'
+                sh 'ls -la build/'
+                echo "Verification completed"
+            }
+        }
     }
 }
-
