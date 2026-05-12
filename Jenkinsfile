@@ -23,5 +23,14 @@ pipeline {
                 echo "Verification completed"
             }
         }
+        stage('System Info') {
+            steps {
+                echo "=== System Information ==="
+                sh 'whoami'
+                sh 'df -h .'
+                echo "Build Number: ${BUILD_NUMBER}"
+                echo "Name job: ${JOB_NAME}"
+            }
+        }
     }
 }
