@@ -45,5 +45,16 @@ pipeline {
                 }
             }
         }
+        stage('Jenkins_Info') {
+            steps {
+                script {
+                    echo "Build Number: ${env.BUILD_NUMBER}"
+                    echo "Build ID: ${env.BUILD_ID}"
+                    echo "Job Name: ${env.JOB_NAME}"
+                    echo "Workspace: ${env.WORKSPACE}"
+                    echo "Build URL: ${env.BUILD_URL}"
+                }
+            }
+        }
     }
 }
