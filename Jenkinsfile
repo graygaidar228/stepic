@@ -36,5 +36,14 @@ pipeline {
                 }
             }
         }
+        stage('Jenkins Info') {
+            steps{
+                script {
+                echo "Using version: ${env.APP_VERSION}"
+                def imageName = "myapp:1.0.${env.APP_VERSION}"
+                echo "Docker image would be: ${imageName}"
+                }
+            }
+        }
     }
 }
