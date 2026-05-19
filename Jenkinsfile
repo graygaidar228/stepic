@@ -36,7 +36,7 @@ pipeline {
                 }
             }
         }
-        stage('Jenkins Info') {
+        stage('Display Version') {
             steps{
                 script {
                 echo "Using version: ${env.APP_VERSION}"
