@@ -13,5 +13,17 @@ pipeline {
                 }
             }
         }
+        stage('String Operations') {
+            steps{
+                script {
+                def message = "Jenkins Pipeline Tutorial"
+                echo "${message.length()}"
+                echo "${message.toUpperCase()}"
+                echo "${message.toLowerCase()}"
+                def new_message = message.replace('Tutorial','Course')
+                echo "${new_message}"
+                }
+            }
+        }
     }
 }
