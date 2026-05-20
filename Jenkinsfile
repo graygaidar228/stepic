@@ -73,9 +73,9 @@ pipeline {
         stage('Summary') {
             steps{
             echo "=== Pipeline Execution Summary ==="
-            echo "Branch: ${BRANCH_NAME}"
-            echo "Build Number: ${BUILD_NUMBER}"
-            echo "Deploy Environment: ${DEPLOY_ENV}"
+            echo "Branch: ${env.BRANCH_NAME}"
+            echo "Build Number: ${env.BUILD_NUMBER}"
+            echo "Deploy Environment: ${env.DEPLOY_ENV}"
             echo "All stages completed"
             }
         }
