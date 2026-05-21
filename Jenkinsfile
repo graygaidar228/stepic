@@ -59,5 +59,21 @@ pipeline {
                 }
             }
         }
+        stage('Multi-Environment Deploy') {
+            steps{
+                script{
+                    def deployments = [
+                        'dev': ['dev1.example.com', 'dev2.example.com'],
+                        'staging': ['stage1.example.com'],
+                        'prod': ['prod1.example.com', 'prod2.example.com', 'prod3.example.com']
+                    ]
+                    deployments.each { key, value ->
+                        for (serv in value){
+                            echo "Deploying to ${key}: ${serv}"
+                        }
+                    }
+                }
+            }
+        }
     }
 }
