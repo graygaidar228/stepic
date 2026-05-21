@@ -45,5 +45,19 @@ pipeline {
                 }
             }
         }
+        stage('Environment Variables') {
+            steps{
+                script{
+                    def dict =  [
+                        DATABASE_URL: 'postgresql://db.example.com:5432/mydb',
+                        CACHE_URL: 'redis://cache.example.com:6379',
+                        LOG_LEVEL: 'info',
+                    ]
+                    dict.each { key, value ->
+                        echo "${key}: ${value}"
+                    }
+                }
+            }
+        }
     }
 }
