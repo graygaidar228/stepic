@@ -25,5 +25,25 @@ pipeline {
                 }
             }
         }
+        stage('Configuration Map') {
+            steps{
+                script{
+                    def dict =  [
+                        appName: 'MyWebApp',
+                        version: '2.0.0',
+                        port: '8080',
+                        environment: 'production'
+                    ]
+                    dict.each { key, value ->
+                        echo "${value}"
+                    }
+                    echo "${dict.size()}"
+                    dict['region'] = "us-east-1"
+                    dict.each { key, value ->
+                        echo "${key}: ${value}"
+                    }
+                }
+            }
+        }
     }
 }
