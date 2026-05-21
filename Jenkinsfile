@@ -8,7 +8,7 @@ pipeline {
                     echo "${environments[0]}"
                     echo "${environments[-1]}"
                     echo "${environments.size()}"
-                    echo "$(environments.add('qa'))"
+                    environments.add('qa')
                     echo "${environments.size()}"
                 }
             }
