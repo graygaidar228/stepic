@@ -2,16 +2,16 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            steps{
+            steps {
                 echo "Building application..."
                 sh 'mkdir build'
                 sh 'echo "Application binary" > build/app.jar'
-        post{
-            always {
-                echo "=== Post Actions ==="
-                echo "Pipeline completed"
-                sh 'date'
-                    }
+            }
+            post {
+                always {
+                    echo "=== Post Actions ==="
+                    echo "Pipeline completed"
+                    sh 'date'
                 }
             }
         }
