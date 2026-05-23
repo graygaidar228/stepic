@@ -16,6 +16,20 @@ pipeline {
             }
         }
     }
+        stage('Deploy') {
+            steps {
+                echo "Deploying application..."
+                sh 'sleep 3'
+                echo 'Deployment completed'
+            }
+            post {
+                always {
+                    echo 'Deploy stage finished'
+                    sh 'ls -la build/'
+                }
+            }
+        }
+    }
     post {
         always {
             echo "=== Post Actions ==="
