@@ -26,7 +26,7 @@ pipeline {
         stage('Notify Team') {
             steps {
                 input message: 'Send notification to the team?',
-                ok: "Send Notification"
+                    ok: "Send Notification"
                 echo "Sending notification..."
                 echo 'Notification sent to team@company.com'
             }
@@ -44,7 +44,7 @@ pipeline {
                         ]
                     )
                     echo "Selected strategy: ${strategy}"
-
+                    
                     if (strategy == 'rolling') {
                         echo "Deploying with rolling update..."
                     } else if (strategy == 'blue-green') {
@@ -55,5 +55,14 @@ pipeline {
                 }
             }
         }
+        stage('Approval with Timeout') {
+            steps {
+                    timeout(time: 2, unit: 'MINUTES') {
+                        input message: 'Approve within 2 minutes',
+                            ok: 'Approve'
+                    }
+                    echo "Approval received in time"
+                }
+            }
+        }
     }
-}
