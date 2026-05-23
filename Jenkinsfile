@@ -14,6 +14,7 @@ pipeline {
                 sh 'sleep 2'
                 sh 'exit 1'
                 echo 'Tests completed'
+                sh 'exit 1'
             }
         }
         stage('Deploy') {
