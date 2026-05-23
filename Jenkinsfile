@@ -64,7 +64,6 @@ pipeline {
                     echo "Approval received in time"
                 }
             }
-        }
         stage('Advanced Approval') {
             steps {
                 script {
@@ -93,3 +92,4 @@ pipeline {
             }
         }
     }
+}
