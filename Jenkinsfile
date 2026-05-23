@@ -47,4 +47,3 @@ pipeline {
             echo "Check console output for details"
             }
         }
-    }
