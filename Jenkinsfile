@@ -15,7 +15,6 @@ pipeline {
                 echo 'Tests completed'
             }
         }
-    }
         stage('Deploy') {
             steps {
                 echo "Deploying application..."
@@ -47,3 +46,4 @@ pipeline {
             echo "Check console output for details"
             }
         }
+    }
