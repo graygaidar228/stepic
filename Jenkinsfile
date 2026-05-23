@@ -91,7 +91,7 @@ pipeline {
                 }
             }
         }
-        stage('Test') {
+        stage('Summary') {
             steps {
                 echo "=== Pipeline Completed ==="
                 echo "All approvals received"
