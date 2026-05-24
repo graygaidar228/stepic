@@ -127,19 +127,21 @@ pipeline {
             echo "Environment: ${DEPLOY_ENVIRONMENT}"
             echo "All services deployed successfully"
 
-            def reportContent = """
-Deployment Report
-==================
-Project: ${PROJECT_NAME}
-Environment: ${DEPLOY_ENVIRONMENT}
-Build Number: ${env.BUILD_NUMBER}
-Build URL: ${env.BUILD_URL}
-Services: ${env.SERVICES}
-Deploy Strategy: ${env.DEPLOY_STRATEGY ?: 'N/A'}
-Status: SUCCESS
-Timestamp: ${new Date()}
-"""
-            writeFile file: 'deployment-report.txt', text: reportContent
+            script {
+                def reportContent = """
+    Deployment Report
+    ==================
+    Project: ${PROJECT_NAME}
+    Environment: ${DEPLOY_ENVIRONMENT}
+    Build Number: ${env.BUILD_NUMBER}
+    Build URL: ${env.BUILD_URL}
+    Services: ${env.SERVICES}
+    Deploy Strategy: ${env.DEPLOY_STRATEGY ?: 'N/A'}
+    Status: SUCCESS
+    Timestamp: ${new Date()}
+    """
+                writeFile file: 'deployment-report.txt', text: reportContent
+            }
         }
         failure {
             echo "✗ Deployment FAILED"
