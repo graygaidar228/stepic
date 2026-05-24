@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Unit Tests') {
             when {
-                expression { env.BUILD_NUMBER % 2 != 0 }
+                expression { (env.BUILD_NUMBER as Integer) % 2 != 0 }
             }
             steps {
                 echo "Running unit tests for build ${env.BUILD_NUMBER}"
@@ -42,7 +42,7 @@ pipeline {
         }
         stage('Integration Tests') {
             when {
-                expression { env.BUILD_NUMBER % 2 == 0 }
+                expression { (env.BUILD_NUMBER as Integer) % 2 == 0 }
             }
             steps {
                 echo "Running integration tests for build ${env.BUILD_NUMBER}"
@@ -77,13 +77,13 @@ pipeline {
                             parameters: [
                                 choice(
                                     name: 'DEPLOY_STRATEGY',
-                                    choices: ['rolling', 
+                                    choices: ['rolling',
                                     'blue-green', 'canary']
                                     ),
                                 booleanParam(
-                                    name: 'SEND_NOTIFICATIONS', 
-                                    defaultValue: true 
-                                    )
+                                    name: 'SEND_NOTIFICATIONS',
+                                    defaultValue: true
+                                )
                             ]
                         )
                         echo "Deploy: ${userInput.DEPLOY_STRATEGY}"
@@ -129,17 +129,17 @@ pipeline {
 
             script {
                 def reportContent = """
-    Deployment Report
-    ==================
-    Project: ${PROJECT_NAME}
-    Environment: ${DEPLOY_ENVIRONMENT}
-    Build Number: ${env.BUILD_NUMBER}
-    Build URL: ${env.BUILD_URL}
-    Services: ${env.SERVICES}
-    Deploy Strategy: ${env.DEPLOY_STRATEGY ?: 'N/A'}
-    Status: SUCCESS
-    Timestamp: ${new Date()}
-    """
+Deployment Report
+==================
+Project: ${PROJECT_NAME}
+Environment: ${DEPLOY_ENVIRONMENT}
+Build Number: ${env.BUILD_NUMBER}
+Build URL: ${env.BUILD_URL}
+Services: ${env.SERVICES}
+Deploy Strategy: ${env.DEPLOY_STRATEGY ?: 'N/A'}
+Status: SUCCESS
+Timestamp: ${new Date()}
+"""
                 writeFile file: 'deployment-report.txt', text: reportContent
             }
         }
