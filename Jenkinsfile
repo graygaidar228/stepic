@@ -22,8 +22,8 @@ pipeline {
                     def services = env.SERVICES.split(',')
                     for (service in services) {
                         echo "Building ${service}..."
-                        sh "mkdir build/$(service)"
-                        sh "touch build/$(service)/app.jar"
+                        sh "mkdir build/${service}"
+                        sh "touch build/${service}/app.jar"
                         sleep 1
                         echo "Build completed for ${service}"
                     }
