@@ -18,7 +18,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh "cd app"
-                sh "npm install"
+                sh "cd app && npm install"
                 echo "Dependencies installed for ${APP_NAME}"
                 }
             }
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 sh "cd app"
                 echo "Building ${APP_NAME}: ${APP_VERSION}"
-                sh "npm run build"
+                sh "cd app && npm run build"
                 echo "Build completed successfully"
                 }
             }
