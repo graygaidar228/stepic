@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    environment{
+        APP_NAME = 'jenkins-sample-app'
+        NODE_ENV = 'development'
+        PORT = '3000'
+    }
     stages {
         stage('Show Build Info') {
             steps {
@@ -10,4 +15,11 @@ pipeline {
                 }
             }
         }
-    }
+        stage('Install Dependencies') {
+            steps {
+                sh "mkdir -p app"
+                sh "npm install"
+                echo "Dependencies installed for ${APP_NAME}"
+                }
+            }
+        }
