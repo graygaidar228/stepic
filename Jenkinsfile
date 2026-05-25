@@ -4,7 +4,7 @@ pipeline {
         APP_NAME = 'jenkins-sample-app'
         NODE_ENV = 'development'
         PORT = '3000'
-        APP_VERSION = "1.0.{BUILD_NUMBER}"
+        APP_VERSION = "1.0.${BUILD_NUMBER}"
     }
     stages {
         stage('Show Build Info') {
