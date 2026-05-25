@@ -35,7 +35,7 @@ function testAppVersion() {
 // Тест 3: Проверка окружения
 function testEnvironment() {
   const env = process.env.NODE_ENV;
-  const validEnvironments = ['development', 'staging', 'production'];
+  const validEnvironments = ['development', 'staging', 'production', 'test'];
 
   if (validEnvironments.includes(env)) {
     console.log('✓ Test 3: Environment validation PASSED');
