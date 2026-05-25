@@ -38,7 +38,7 @@ pipeline {
                 sh "cd app"
                 echo "Running tests in ${NODE_ENV} environment"
                 echo "Building ${APP_NAME}: ${APP_VERSION}"
-                sh "cd app && NODE_ENV=$NODE_ENV APP_VERSION=$APP_VERSION npm test"
+                sh "cd app && NODE_ENV=${NODE_ENV} APP_VERSION=$APP_VERSION npm test"
                 }
             }
         stage('Run Application') {
