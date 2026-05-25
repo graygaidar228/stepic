@@ -4,6 +4,7 @@ pipeline {
         APP_NAME = 'jenkins-sample-app'
         NODE_ENV = 'development'
         PORT = '3000'
+        APP_VERSION = "1.0.{BUILD_NUMBER}"
     }
     stages {
         stage('Show Build Info') {
@@ -19,6 +20,14 @@ pipeline {
                 sh "mkdir -p app"
                 sh "npm install"
                 echo "Dependencies installed for ${APP_NAME}"
+                }
+            }
+        stage('Build') {
+            steps {
+                sh "cd app"
+                echo "Building ${APP_NAME}: ${APP_VERSION}"
+                sh "npm run build"
+                echo "Build completed successfully"
                 }
             }
         }
