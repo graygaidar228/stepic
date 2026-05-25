@@ -18,7 +18,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh "cd app"
-                sh "apt update && apt install npm nodejs -y && npm install"
+                sh "npm install"
                 echo "Dependencies installed for ${APP_NAME}"
                 }
             }
