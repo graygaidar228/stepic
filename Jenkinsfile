@@ -14,7 +14,6 @@ pipeline {
                 echo "Build URL: ${BUILD_URL}"
                 }
             }
-        }
         stage('Install Dependencies') {
             steps {
                 sh "mkdir -p app"
@@ -23,3 +22,4 @@ pipeline {
                 }
             }
         }
+    }
