@@ -41,5 +41,17 @@ pipeline {
                 sh "cd app && NODE_ENV=$NODE_ENV APP_VERSION=$APP_VERSION npm test"
                 }
             }
+        stage('Run Application') {
+            steps {
+                sh "cd app"
+                echo "Starting ${APP_NAME} on port ${PORT}"
+                sh "cd app && NODE_ENV=$NODE_ENV APP_VERSION=$APP_VERSION BUILD_NUMBER=$BUILD_NUMBER PORT=$PORT npm start &"
+                sh "sleep 3"
+                sh "curl http://localhost:${PORT}/"
+                sh "curl http://localhost:${PORT}/config"
+                sh 'pkill -f "node server.js"'
+                }
+            }
+
         }
     }
