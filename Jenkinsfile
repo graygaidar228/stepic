@@ -17,7 +17,7 @@ pipeline {
             }
         stage('Install Dependencies') {
             steps {
-                sh "mkdir -p app"
+                sh "cd app"
                 sh "npm install"
                 echo "Dependencies installed for ${APP_NAME}"
                 }
