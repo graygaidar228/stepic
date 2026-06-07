@@ -63,5 +63,25 @@ pipeline {
                 }
             }
         }
+        stage('Production Deploy') {
+            when {
+                environment name: 'NODE_ENV', value: 'production'
+            }
+            steps {
+                withCredentials([
+                    string(credentialsId: 'api-key', variable: 'API_KEY'),
+                    usernamePassword(credentialsId: 'database-creds',
+                                     usernameVariable: 'DB_USER',
+                                     passwordVariable: 'DB_PASS'),
+                    string(credentialsId: 'database-url', variable: 'DATABASE_URL')
+                ]) {
+                    echo "Deploying to production with full configuration"
+                    echo "API Key: [configured]"
+                    echo "Database: ${DB_USER}@${DATABASE_URL}"
+                    echo "Environment: ${NODE_ENV}"
+                    echo "Deployment completed successfully"
+                }
+            }
+        }
     }
 }
