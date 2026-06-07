@@ -3,6 +3,8 @@ pipeline {
     parameters {
         string(name: 'APP_VERSION', defaultValue: '1.0.0', description: 'Application version to build')
         choice(name: 'ENVIRONMENT', choices: ['development', 'staging', 'production'], description: 'Target environment')
+        booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Run test suite')
+        booleanParam(name: 'RUN_LINT', defaultValue: false, description: 'Run linter')
     }
     environment {
         APP_NAME = 'jenkins-sample-app'
@@ -30,6 +32,30 @@ pipeline {
                     } else {
                         echo "Development mode - minimal checks"
                     }
+                }
+            }
+        }
+        stage('Lint') {
+            when {
+                expression { params.RUN_LINT == true }
+            }
+            steps {
+                dir('app') {
+                    echo "Running linter..."
+                    sh 'npm run lint'
+                    echo "Linting completed"
+                }
+            }
+        }
+        stage('Test') {
+            when {
+                expression { params.RUN_TESTS == true }
+            }
+            steps {
+                dir('app') {
+                    echo "Running tests for ${params.APP_VERSION}"
+                    sh "NODE_ENV=test APP_VERSION=${params.APP_VERSION} npm test"
+                    echo "All tests passed"
                 }
             }
         }
