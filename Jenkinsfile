@@ -135,12 +135,14 @@ pipeline {
                         sh "DATABASE_URL=${DATABASE_URL}"
                         sh "npm start &"
                         sh 'sleep 3'
-                        def health = sh(script: 'curl -s http://localhost:3000/health', returnStdout: true).trim()
-                        def config = sh(script: 'curl -s http://localhost:3000/config', returnStdout: true).trim()
-                        if (config.contains(BUILD_VERSION) && config.contains(params.DEPLOY_ENVIRONMENT)) {
-                            echo "Smoke tests passed ✓"
-                        } else {
-                            echo "Warning: Smoke tests detected version/environment mismatch"
+                        script {
+                            def health = sh(script: 'curl -s http://localhost:3000/health', returnStdout: true).trim()
+                            def config = sh(script: 'curl -s http://localhost:3000/config', returnStdout: true).trim()
+                            if (config.contains(BUILD_VERSION) && config.contains(params.DEPLOY_ENVIRONMENT)) {
+                                echo "Smoke tests passed ✓"
+                            } else {
+                                echo "Warning: Smoke tests detected version/environment mismatch"
+                            }
                         }
                         sh 'pkill -f "node server.js" || true'
                     }
