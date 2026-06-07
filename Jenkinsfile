@@ -83,5 +83,12 @@ pipeline {
                 }
             }
         }
+        stage('Cleanup') {
+            steps {
+                sh 'rm -f app/db.config'
+                echo "Cleaned up sensitive files"
+                echo "Pipeline completed for build #${BUILD_NUMBER}"
+            }
+        }
     }
 }
