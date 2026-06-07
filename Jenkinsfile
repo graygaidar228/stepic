@@ -39,5 +39,10 @@ pipeline {
                 archiveArtifacts artifacts: 'python-app/test-results.xml, python-app/coverage.xml, python-app/htmlcov/**/*'
             }
         }
+        stage('Archive Multiple Types') {
+            steps {
+                archiveArtifacts artifacts: 'python-app/dist/package/*, python-app/dist/docs/*.md, python-app/*.xml'
+            }
+        }
     }
 }
