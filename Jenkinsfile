@@ -8,10 +8,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mkdir -p app'
-                sh 'npm install'
-                sh 'npm run build'
-                echo "Build completed for version ${APP_VERSION}"
+                dir('app') {
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
                 echo "Build completed for version ${APP_VERSION}"
             }
         }
