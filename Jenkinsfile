@@ -1,24 +1,23 @@
 pipeline {
     agent any
-    environment {
-        APP_VERSION = '1.0.0'
-        ENVIRONMENT = 'production'
-    }
     stages {
-        stage('Build') {
+        stage('Выбор пакетов') {
             steps {
-                dir('python-app') {
-                    sh "pip3 install -r requirements.txt"
-                    sh "APP_VERSION=${APP_VERSION} BUILD_NUMBER=${env.BUILD_NUMBER} python3 build.py"
+                script {
+                    def packageIds = ['pkg-001', 'pkg-002', 'pkg-003', 'pkg-004']
+
+                    def selectedPackages = input(
+                        message: 'Выберите Package ID для сборки:',
+                        parameters: [
+                            [
+                                $class: 'ChoiceParameterDefinition',
+                                name: 'PACKAGES',
+                                choices: packageIds,
+                                description: 'Доступные Package ID',
+                            ]
+                        ]
+                    )
                 }
-                stash name: "built-app", includes: "python-app/dist/**"
-            }
-        }
-        stage('Verify Build') {
-            steps {
-                unstash "built-app"
-                sh "ls -la python-app/dist/"
-                sh "cat python-app/dist/build-info.json"
             }
         }
     }
